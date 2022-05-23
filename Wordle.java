@@ -29,11 +29,11 @@ public class Wordle {
             gw.showMessage("in word list.");
         }
         for (int col = 0; col < WordleGWindow.N_COLS; col++) {
-            if (userWord.substring(col, col + 1).equals(answerToWordle))
+            if (userWord.substring(col, col + 1).equals(answerToWordle.substring(col, col + 1)))
             {
                 gw.setSquareColor(gw.getCurrentRow(), col, WordleGWindow.CORRECT_COLOR);
             }
-            if (gw.getSquareLetter(gw.getCurrentRow(), col).compareTo(answerToWordle) != -1) {
+            if (gw.getSquareLetter(gw.getCurrentRow(), col).equals(answerToWordle.substring(col, col + 1)) != false) {
                 gw.setSquareColor(gw.getCurrentRow(), col, WordleGWindow.PRESENT_COLOR);
             } else {
                 gw.setSquareColor(gw.getCurrentRow(), col, WordleGWindow.MISSING_COLOR);
@@ -60,7 +60,7 @@ public class Wordle {
         int rowIndex = 1;
         if(rowIndex <= WordleGWindow.N_ROWS)
         {
-            gw.setCurrentRow(rowIndex);
+            gw.setCurrentRow(gw.getCurrentRow() + 1);
         }
     }
 

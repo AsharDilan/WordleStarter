@@ -14,11 +14,12 @@ public class Wordle {
     }
 
     public void enterAction(String s) {
+        System.out.println(answerToWordle);
         String userWord = s;
-        userWord = userWord.toLowerCase();
+
         boolean check = false;
         for (String checkWord : WordleDictionary.FIVE_LETTER_WORDS) {
-            if (userWord.equals(checkWord)) {
+            if (userWord.toLowerCase().equals(checkWord)) {
                 check = true;
             }
         }
@@ -27,20 +28,21 @@ public class Wordle {
 
         } else {
             gw.showMessage("in word list.");
-        }
+
         for (int col = 0; col < WordleGWindow.N_COLS; col++) {
-            if (userWord.substring(col, col + 1).equals(answerToWordle.substring(col, col + 1)))
-            {
+            System.out.println(userWord.substring(col, col + 1) + " " + answerToWordle.substring(col, col + 1) );
+            if (userWord.substring(col, col + 1).equals(answerToWordle.substring(col, col + 1))) {
                 gw.setSquareColor(gw.getCurrentRow(), col, WordleGWindow.CORRECT_COLOR);
             }
-            if (gw.getSquareLetter(gw.getCurrentRow(), col).equals(answerToWordle.substring(col, col + 1)) != false) {
+            else if (answerToWordle.contains(userWord.substring(col, col + 1)) && !gw.getSquareColor(gw.getCurrentRow(), col).equals(WordleGWindow.CORRECT_COLOR)) {
                 gw.setSquareColor(gw.getCurrentRow(), col, WordleGWindow.PRESENT_COLOR);
             } else {
                 gw.setSquareColor(gw.getCurrentRow(), col, WordleGWindow.MISSING_COLOR);
             }
-
         }
-        updateRow();
+            updateRow();
+        }
+
     }
 
 
